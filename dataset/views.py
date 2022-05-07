@@ -47,6 +47,7 @@ def insert_dataset_record(request):
 def hello(request):
     return "hello"
 def download(request):
+    print("request")
     file_path="videos/OpenGL Application 2021-01-24 19-46-54.mp4"
     with open(file_path) as f:
         response= HttpResponse(f.read(),content_type="application/adminupload")
