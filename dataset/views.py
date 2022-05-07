@@ -29,7 +29,7 @@ def insert_dataset_record(request):
     #body_unicode = request.data.decode('utf-8')
     print(request.data)
     #body = json.loads(request.data)
-    print(videofile.name)
+    #print(videofile.name)
     filename = fs.save(videofile.name, videofile)
     print("request",request.data)
     request.data['video_path']=filename
@@ -41,6 +41,7 @@ def insert_dataset_record(request):
             data['response'] = "Your order went well"
             return JsonResponse({"data":data})
         return JsonResponse({"error":serializer.errors})
+    return JsonResponse({"error":"error"})
 
 def hello(request):
     return "hello"
