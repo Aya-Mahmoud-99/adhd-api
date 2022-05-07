@@ -49,7 +49,7 @@ def hello(request):
     return "hello"
 def download(request):
     print("request")
-    file_path="videos/OpenGL Application 2021-01-24 19-46-54.mp4"
+    file_path="videos/"+request.GET.get('file_name', '')
     file_path=os.path.join(settings.MEDIA_ROOT,file_path)
     with open(file_path,'rb') as f:
         response= HttpResponse(f.read(),content_type="application/adminupload")
