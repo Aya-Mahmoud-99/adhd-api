@@ -24,7 +24,7 @@ def export_dataset(request):
 
 @api_view(["POST"])
 def insert_dataset_record(request):
-    videofile = request.FILES.get('videoData')
+    videofile = request.FILES['videoData']
     fs = FileSystemStorage(location="videos")
     #body_unicode = request.data.decode('utf-8')
     print(request.data)
