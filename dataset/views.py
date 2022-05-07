@@ -7,7 +7,8 @@ from .serializers import *
 from rest_framework.request import Request
 import json
 from rest_framework.decorators import api_view
-
+import os
+from django.conf import settings
 
 from django.core.files.storage import FileSystemStorage
 
@@ -49,10 +50,10 @@ def hello(request):
 def download(request):
     print("request")
     file_path="videos/OpenGL Application 2021-01-24 19-46-54.mp4"
-    file_path=os.path.join(settings.MEDIA_ROOT)
-    with open(file_path) as f:
+    file_path=os.path.join(settings.MEDIA_ROOT,file_path)
+    with open(file_path,'rb') as f:
         response= HttpResponse(f.read(),content_type="application/adminupload")
-        response['Content-Disposition'] = "inline:filename"+os.path.basename(file_path)
+        response['Content-Disposition'] = 'attachment; filename="dataset.mp4"'
         return response
 
 
