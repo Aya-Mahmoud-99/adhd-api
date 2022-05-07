@@ -18,12 +18,14 @@ from django.urls import path
 from dataset.views import export_dataset
 from dataset.views import insert_dataset_record
 from dataset.views import hello
+from dataset.views import download
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dataset/export', export_dataset),
     path('dataset/insert',insert_dataset_record),
+    path('video/download',download),
     path('', hello),
 
 ]
