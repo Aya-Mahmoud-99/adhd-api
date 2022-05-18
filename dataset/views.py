@@ -9,7 +9,7 @@ import json
 from rest_framework.decorators import api_view
 import os
 from django.conf import settings
-
+import base64
 from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
@@ -25,16 +25,17 @@ def export_dataset(request):
 
 @api_view(["POST"])
 def insert_dataset_record(request):
-    print(request)
-    videofile = request.FILES['videoData']
-    fs = FileSystemStorage(location="videos")
-    #body_unicode = request.data.decode('utf-8')
-    print(request.data)
-    #body = json.loads(request.data)
-    #print(videofile.name)
-    filename = fs.save(videofile.name, videofile)
-    print("request",request.data)
-    request.data['video_path']=filename
+    # print(request)
+    # videofile = request.FILES['videoData']
+    # fs = FileSystemStorage(location="videos")
+    # #body_unicode = request.data.decode('utf-8')
+    # print(request.data)
+    # #body = json.loads(request.data)
+    # #print(videofile.name)
+    # filename = fs.save(videofile.name, videofile)
+    #request.data['video_blob']
+    #print("request",request.data)
+    #request.data['video_path']=filename
     if request.method == 'POST':
         serializer = DatasetSerializer(data=request.data)
         data = {}
@@ -55,6 +56,10 @@ def download(request):
         response= HttpResponse(f.read(),content_type="application/adminupload")
         response['Content-Disposition'] = 'attachment; filename="dataset.mp4"'
         return response
+
+def getRecord(request):
+    obj = dataset.objects.get(request.GET.get('id', ''))
+    return base64.decodestring(obj.values_list('video_blob', flat=True).first())
 
 
 
