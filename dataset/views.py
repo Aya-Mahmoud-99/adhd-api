@@ -17,8 +17,8 @@ from django.core.files.storage import FileSystemStorage
 def export_dataset(request):
     response=HttpResponse(content_type='text/csv')
     writer=csv.writer(response)
-    writer.writerow(['video_path','age','gender','diagnosedWithADHD','responseTime','correctTimingResponses','correctAttentionResponses','hyperactivityTarget','hyperactivityNonTarget','hyperactivityRandom','impulsiveResponses','omissionErrors','totalResponses'])
-    for data in dataset.objects.all().values_list('video_path','age','gender','diagnosedWithADHD','responseTime','correctTimingResponses','correctAttentionResponses','hyperactivityTarget','hyperactivityNonTarget','hyperactivityRandom','impulsiveResponses','omissionErrors','totalResponses'):
+    writer.writerow(['video_blob','age','gender','diagnosedWithADHD','responseTime','correctTimingResponses','correctAttentionResponses','hyperactivityTarget','hyperactivityNonTarget','hyperactivityRandom','impulsiveResponses','omissionErrors','totalResponses'])
+    for data in dataset.objects.all().values_list('video_blob','age','gender','diagnosedWithADHD','responseTime','correctTimingResponses','correctAttentionResponses','hyperactivityTarget','hyperactivityNonTarget','hyperactivityRandom','impulsiveResponses','omissionErrors','totalResponses'):
         writer.writerow(data)
     response['Content-Disposition']='attachment; filename="dataset.csv"'
     return response
