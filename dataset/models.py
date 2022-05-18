@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class dataset(models.Model):
     #video_path=models.TextField() #################
-    video_blob=models.TextField(db_column='data',blank=True)
+    video_blob=models.TextField(blank=True)
     age=models.IntegerField()
     gender=models.CharField(max_length=1)
     age=models.IntegerField()
